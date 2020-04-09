@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Exceptions;
+
+use Exception;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
+
+class Handler extends ExceptionHandler
+{
+    /**
+     * A list of the exception types that should not be reported.
+     *
+     * @var array
+     */
+    protected $dontReport = [
+        AuthorizationException::class,
+        HttpException::class,
+        ModelNotFoundException::class,
+        ValidationException::class,
+    ];
+
+    /**
+     * Report or log an exception.
+     *
+     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
+     *
+     * @param  \Exception  $exception
+     * @return void
+     */
+    public function report(Exception $exception)
+    {
+        parent::report($exception);
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception  $exception
+     * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     */
+    public function render($request, Exception $exception)
+    {
+
+        if(env('APP_DEBUG')){
+            return parent::render($request, $exception);
+        }
+        else{
+            try {
+                    $code = $exception->getStatusCode();
+                    
+                    if($code==404){
+                        $other_msg ="Halaman yang dituju tidak ada";
+                    }
+                    else if($code==405){
+                        $other_msg ="Method yang anda kirim tidak diizinkan";
+                    }
+                    else{
+                        $other_msg ="Error tidak diketahui. code ".$code;
+                    }
+
+                    $res_data = array(
+                        'status'=>$code,
+                        'message'=>$exception->getMessage()?$exception->getMessage():$other_msg,
+                        'data' => array()
+                    );
+                    $res = response()->json($res_data, $code);
+                    return $res;
+            } catch (\Throwable $th) {
+                    $res_data= array(
+                        'status'=>500,
+                        'message'=>'Internal Server Error',
+                        'data' => array()
+                    );
+
+                    return response()->json($res_data, 500);
+            }
+        }
+    }
+}
