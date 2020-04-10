@@ -28,13 +28,20 @@ class Absensi extends Controller {
         else{
             $res = array('create'=>true);
         }
+        $current =AbsensiModel::where('id_user',$req->user->id_user)
+                                ->where('status',1)
+                                ->where(DB::raw('DATE_FORMAT(punch_in,"%d-%m-%Y")'),date('d-m-Y'))->first();
+        if($current){
+        return $this->response('Anda sudah Absen Masuk dan Pulang hari ini. Terima Kasih',[],403);
+
+        }
         return $this->response('Checkpoint',$res);
     }
     public function punchin(Request $req)
     {
         $current =AbsensiModel::where('id_user',$req->user->id_user)->where(DB::raw('DATE_FORMAT(punch_in,"%d-%m-%Y")'),date('d-m-Y'))->first();
         if($current){
-            return $this->response('Maaf, Absen masuk ditolak. Karena Absen hari ini sudah selesai. Silahkan coba lagi besok',[],403);
+            return $this->response('Maaf, Absen masuk ditolak. Karena Anda sudah melakukan Absen. Silahkan coba lagi besok',[],403);
         }
         else{
             $data = new AbsensiModel();
