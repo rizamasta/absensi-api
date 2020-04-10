@@ -5,7 +5,7 @@ $router->group(['prefix' => 'v1','middleware' => 'api.auth'],  function () use (
     $router->get('/', function () use ($router) {
         return array(
             'status'=>200,
-            'message'=>'Welcome to Bakkat API',
+            'message'=>'Welcome to Absensi API',
             'data' => array('version'=>'1.0')
         );
     });

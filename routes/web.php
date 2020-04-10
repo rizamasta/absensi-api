@@ -13,7 +13,7 @@
 $router->get('/', function () use ($router) {
     return array(
         'status'=>200,
-        'message'=>'Welcome to Bakkat API',
+        'message'=>'Welcome to Absensi API',
         'data' => array(
                         'version' => $router->app->version(),
                         'datetime'=> date('Y-m-d H:i:s')
