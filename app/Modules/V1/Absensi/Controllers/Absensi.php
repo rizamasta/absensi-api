@@ -32,7 +32,7 @@ class Absensi extends Controller {
     }
     public function punchin(Request $req)
     {
-        $current =AbsensiModel::where('id_user',$req->user->id_user)->whereRaw('DATE_FORMAT(punch_in,"%d-%m-%Y")=CURDATE()')->first();
+        $current =AbsensiModel::where('id_user',$req->user->id_user)->where(DB::raw('DATE_FORMAT(punch_in,"%d-%m-%Y")'),date('d-m-Y'))->first();
         if($current){
             return $this->response('Absen sudah dimulai',[],403);
         }
