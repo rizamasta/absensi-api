@@ -5,7 +5,7 @@ use App\Modules\V1\User\Models\User;
 use App\Modules\V1\Absensi\Models\Absensi as AbsensiModel;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 
