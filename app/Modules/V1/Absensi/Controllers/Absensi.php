@@ -34,7 +34,7 @@ class Absensi extends Controller {
     {
         $current =AbsensiModel::where('id_user',$req->user->id_user)->where(DB::raw('DATE_FORMAT(punch_in,"%d-%m-%Y")'),date('d-m-Y'))->first();
         if($current){
-            return $this->response('Absen sudah dimulai',[],403);
+            return $this->response('Maaf, Absen masuk ditolak. Karena Absen hari ini sudah selesai.',[],403);
         }
         else{
             $data = new AbsensiModel();
