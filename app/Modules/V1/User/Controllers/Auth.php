@@ -4,17 +4,12 @@ use App\Http\Controllers\Controller;
 use App\Modules\V1\User\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Exports\Report;
-use Maatwebsite\Excel\Facades\Excel;
 use Validator;
 
 
 class Auth extends Controller {
 
     public function login(Request $req){
-        // return Excel::download(new Report, 'invoices.xlsx');
-        Excel::store(new Report(2018), 'invoices.xlsx');
-        return "";
         $body =(Object)$req->json()->all();
 
         $rules = array(
