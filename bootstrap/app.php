@@ -59,6 +59,7 @@ $app->singleton(
 
 $app->register('Nord\Lumen\Cors\CorsServiceProvider');
 $app->register(Illuminate\Mail\MailServiceProvider::class);
+$app->register(Maatwebsite\Excel\ExcelServiceProvider::class);
 $app->middleware([
     // App\Http\Middleware\ExampleMiddleware::class
     'Nord\Lumen\Cors\CorsMiddleware',
