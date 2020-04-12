@@ -26,6 +26,10 @@ $router->group(['prefix' => 'v1','middleware' => 'api.auth'],  function () use (
     $router->group(['prefix' => 'user', 'namespace' => 'App\Modules\V1\User\Controllers','middleware' => 'jwt.auth'], function() use($router) {
         $router->get('/me', 'User@me');
         $router->put('/change-password', 'User@changePassword');
+        $router->get('/kinerja', 'Kinerjaharian@list');
+        $router->post('/kinerja', 'Kinerjaharian@create');
+        $router->put('/kinerja/{id}', 'Kinerjaharian@update');
+
 
     });
     $router->group(['prefix' => 'absensi', 'namespace' => 'App\Modules\V1\Absensi\Controllers','middleware' => 'jwt.auth'], function() use($router) {
