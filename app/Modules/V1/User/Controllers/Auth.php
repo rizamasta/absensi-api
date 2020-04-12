@@ -44,6 +44,7 @@ class Auth extends Controller {
                                     'level' =>$user->level,
                                     'position' =>$user->position,
                                     'phone' => $user->phone,
+                                    'rules' => $user->rules,
                                     'token' =>$this->jwt($user)
                     );
                     return $this->response('Welcome back, '.$user->fullname,$data);

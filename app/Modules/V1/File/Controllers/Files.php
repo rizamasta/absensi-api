@@ -6,6 +6,8 @@ use  Maatwebsite\Excel\Facades\Excel;
 class Files {
     public function read($name="empty"){
         try {
+            //code...
+            Excel::store(new AbsensiReport, $name.'.xlsx');
             return  Storage::download($name.'.xlsx');
         } catch (\Throwable $th) {
             //throw $th;
