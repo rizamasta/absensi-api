@@ -29,6 +29,7 @@ $router->group(['prefix' => 'v1','middleware' => 'api.auth'],  function () use (
         $router->get('/kinerja', 'Kinerjaharian@list');
         $router->post('/kinerja', 'Kinerjaharian@create');
         $router->put('/kinerja/{id}', 'Kinerjaharian@update');
+        $router->delete('/kinerja/{id}', 'Kinerjaharian@delete');
 
 
     });

@@ -89,4 +89,12 @@ class Kinerjaharian extends Controller {
             return $this->response('Invalid Parameters',$validator->errors(),400);
         }
     }
+    public function delete(Request $req,$id){
+        if(Kinerja::where('id_kinerja',$id)->delete()){
+            return $this->response('Berhasil menghapus data');
+        }
+        else{
+            return $this->response('Gagal menghapus data',[],400);
+        }
+    }
 }
