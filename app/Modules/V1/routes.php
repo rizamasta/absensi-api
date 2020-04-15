@@ -27,6 +27,7 @@ $router->group(['prefix' => 'v1','middleware' => 'api.auth'],  function () use (
         $router->get('/me', 'User@me');
         $router->put('/change-password', 'User@changePassword');
         $router->get('/kinerja', 'Kinerjaharian@list');
+        $router->get('/kinerja/report', 'Kinerjaharian@report');
         $router->post('/kinerja', 'Kinerjaharian@create');
         $router->put('/kinerja/{id}', 'Kinerjaharian@update');
         $router->delete('/kinerja/{id}', 'Kinerjaharian@delete');

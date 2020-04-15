@@ -18,6 +18,10 @@ class Kinerjaharian extends Controller {
                         ->get();
          return $this->response('Kinerja harian',$data);
     }
+    public function report(Request $req){
+        $date = !empty($req->date)?$req->date:date('Y-m-d');
+        return Excel::download(new KinerjaReport($req->user->id_user,$date), 'Kinerja-harian_'.$date.'.xlsx');
+    }
     public function create(Request $req){
         $body = (Object)$req->json()->all();
         $rules = array(
