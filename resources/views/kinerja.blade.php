@@ -40,17 +40,16 @@
        <th>Output</th> 
     </tr>
     @forelse($kinerja as $key => $kin)
-        <tr valign="top">
-            <td style="text-align:left">{{$key+1}}</td>
-            <td colspan=5 style="height:auto;word-wrap: break-word;">{{$kin->description}}</td>
-            <td style="text-align:left">{{$kin->metrix}}</td>
-            <td style="text-align:left">{{$kin->volume}}</td>
-            <td style="text-align:left">{{$kin->output}}</td> 
+        <tr>
+            <td style="text-align:left;vertical-align: text-top;">{{$key+1}}</td>
+            <td colspan=5 style="height:80px;;vertical-align: text-top;word-wrap: break-word;">{{$kin->description}}</td>
+            <td style="text-align:left;vertical-align: text-top;">{{$kin->metrix}}</td>
+            <td style="text-align:left;vertical-align: text-top;">{{$kin->volume}}</td>
+            <td style="text-align:left;vertical-align: text-top;">{{$kin->output}}</td> 
         </tr>
     @empty
         <tr>
         <td colspan='9'>Tidak ada data </td>
         </tr>
     @endforelse
-
 </table>
