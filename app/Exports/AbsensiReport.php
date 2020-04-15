@@ -20,11 +20,12 @@ class AbsensiReport implements WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
-
-        for ($day = 6; $day >= 2; $day--) {
-            $start = date('Y-m-d', strtotime('-'.$day.' days'));
-            $data =  new AbsenPerDay($start);
-            if($data){
+        $h = date('Y-m-d',\strtotime('-5 days'));
+        for ($day = 1; $day <= 5; $day++) {
+            $start = date('Y-m-d', strtotime($h.' +'.$day.' days'));
+            $da = date("w",\strtotime($start));
+            if($da!=0 && $da!=6){
+                $data =  new AbsenPerDay($start);
                 $sheets[] =$data;
             }
         }
