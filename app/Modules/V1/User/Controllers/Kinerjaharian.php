@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use App\Modules\V1\User\Models\Kinerja;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Exports\KinerjaReport;
+use  Maatwebsite\Excel\Facades\Excel;
 
 use Validator;
 
