@@ -9,8 +9,6 @@
         "firebase/php-jwt": "^5.0",
         "illuminate/mail": "5.8.35",
         "laravel/lumen-framework": "5.8.*",
-        "league/flysystem": "^1.0",
-        "maatwebsite/excel": "^3.1",
         "nordsoftware/lumen-cors": "^3.1"
     },
     "require-dev": {
