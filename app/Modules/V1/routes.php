@@ -38,6 +38,7 @@ $router->group(['prefix' => 'v1','middleware' => 'api.auth'],  function () use (
         $router->get('/checkpoint', 'Absensi@checkpoint');
         $router->post('/punchin', 'Absensi@punchin');
         $router->put('/punchout', 'Absensi@punchout');
+        $router->get('/export', 'Absensi@export');
     });
 
     

@@ -3,7 +3,8 @@ namespace App\Modules\V1\Absensi\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\V1\User\Models\User;
 use App\Modules\V1\Absensi\Models\Absensi as AbsensiModel;
-
+use App\Exports\AbsensiReport;
+use  Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -58,5 +59,9 @@ class Absensi extends Controller {
         else{
             return $this->response('Absen gagal',[],400);
         }
+    }
+    public function export(Request $req)
+    {
+        return Excel::download(new AbsensiReport, date('YmdTHis').'.xlsx');
     }
 }
