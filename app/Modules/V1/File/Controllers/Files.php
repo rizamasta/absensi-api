@@ -6,7 +6,7 @@ use App\Exports\KinerjaReport;
 use  Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 class Files {
-    public function read($name="empty",$id="1"){
+    public function read($name="empty",$id="1",Request $req){
         try {
             //code...
             if($name=="absensi"){
