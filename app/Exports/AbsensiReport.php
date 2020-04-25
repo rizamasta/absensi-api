@@ -21,7 +21,7 @@ class AbsensiReport implements WithMultipleSheets
     {
         $sheets = [];
         $h = date('Y-m-d',\strtotime('-5 days'));
-        for ($day = 1; $day <= 5; $day++) {
+        for ($day = 0; $day <= 5; $day++) {
             $start = date('Y-m-d', strtotime($h.' +'.$day.' days'));
             $da = date("w",\strtotime($start));
             if($da!=0 && $da!=6){
