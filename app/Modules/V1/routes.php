@@ -1,6 +1,6 @@
 <?php
 $router->group(['prefix' => 's', 'namespace' => 'App\Modules\V1\File\Controllers'], function() use($router) {
-    $router->get('/file/{name}', 'Files@read');
+    $router->get('/file/{name}/{id}', 'Files@read');
 });
 
 $router->group(['prefix' => 'v1','middleware' => 'api.auth'],  function () use ($router) {

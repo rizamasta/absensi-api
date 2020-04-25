@@ -12,7 +12,11 @@ use Validator;
 
 
 class User extends Controller {
-
+    
+    public function list(Type $var = null)
+    {
+        # code...
+    }
     public function register(Request $req){
         $body =(Object)$req->json()->all();
         $rules= array(
