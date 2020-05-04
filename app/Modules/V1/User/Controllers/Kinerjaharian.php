@@ -12,7 +12,7 @@ use Validator;
 
 class Kinerjaharian extends Controller {
     public function list(Request $req){
-        $date = !empty($req->date)?$req->date:date('Y-m-d');
+        $date = !empty($req->date)?date('Y-m-d',\strtotime($req->date)):date('Y-m-d');
         $can_update = $date==date('Y-m-d')?"1":"0";
         $data = Kinerja::select("*")->selectRaw($can_update." as can_edit")
                         ->where("id_user",$req->user->id_user)
@@ -21,7 +21,7 @@ class Kinerjaharian extends Controller {
          return $this->response('Kinerja harian',$data);
     }
     public function report(Request $req){
-        $date = !empty($req->date)?$req->date:date('Y-m-d');
+        $date = !empty($req->date)?date('Y-m-d',\strtotime($req->date)):date('Y-m-d');
         return Excel::download(new KinerjaReport($req->user->id_user,$date), 'Kinerja-harian_'.$date.'.xlsx');
     }
     public function create(Request $req){
