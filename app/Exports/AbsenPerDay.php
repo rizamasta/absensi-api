@@ -46,7 +46,7 @@ class AbsenPerDay implements FromQuery, WithTitle,WithHeadings
                             ->leftJoin("user_profile","user_profile.id_user","absensi.id_user")
                             ->where(DB::raw('DATE_FORMAT(punch_in,"%Y-%m-%d")'),$this->date)
                             ->where('absensi.id_user',"!=",1)
-                            ->where('status',1)
+                            // ->where('status',1)
                             ->orderBy('srNo','asc');
     }
 
