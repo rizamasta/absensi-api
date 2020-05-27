@@ -6,9 +6,11 @@ use Maatwebsite\Excel\Concerns\WithTitle;
 use App\Modules\V1\Absensi\Models\Absensi as AbsensiModel;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 
-class AbsenPerDay implements FromQuery, WithTitle,WithHeadings
+
+class AbsenPerDay implements FromQuery, WithTitle,WithHeadings,ShouldAutoSize
 {
     private $date;
     private $days=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
@@ -26,9 +28,9 @@ class AbsenPerDay implements FromQuery, WithTitle,WithHeadings
             'GOLONGAN',
             'SATUAN',
             'JABATAN',
-            'TANGGAL',
-            'MASUK',
-            'PULANG',
+            // 'TANGGAL',
+            'WAKTU MASUK',
+            'WAKTU PULANG',
             'DURASI'
         ];
     }
@@ -39,9 +41,9 @@ class AbsenPerDay implements FromQuery, WithTitle,WithHeadings
     {   
          DB::statement(DB::raw('set @row=0'));
         return AbsensiModel::select(array(DB::raw('@row := @row + 1 AS SrNo'),"fullname","level","location","position"))
-                            ->selectRaw("DATE_FORMAT(punch_in,'%d-%m-%Y') as tanggal")
-                            ->selectRaw("DATE_FORMAT(punch_in,'%H:%i') as masuk")
-                            ->selectRaw("DATE_FORMAT(punch_out,'%H:%i') as pulang")
+                            // ->selectRaw("DATE_FORMAT(punch_in,'%d-%m-%Y') as tanggal")
+                            ->selectRaw("DATE_FORMAT(punch_in,'%d-%m-%Y %H:%i') as masuk")
+                            ->selectRaw("DATE_FORMAT(punch_out,'%d-%m-%Y %H:%i') as pulang")
                             ->selectRaw("TIMEDIFF(punch_out,punch_in) as duration")
                             ->leftJoin("user_profile","user_profile.id_user","absensi.id_user")
                             ->where(DB::raw('DATE_FORMAT(punch_in,"%Y-%m-%d")'),$this->date)
