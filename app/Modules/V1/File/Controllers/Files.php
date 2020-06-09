@@ -16,7 +16,7 @@ class Files {
                 return  Storage::download($n);
             }
             else if($name=="kinerja"){
-                $date = !empty($req->date)?$req->date:date('Y-m-d');
+                $date = !empty($req->date)?date('Y-m-d',\strtotime($req->date)):date('Y-m-d');
                 $n = "Kinerja-harian_".$date.'.xlsx';
                 Excel::store(new KinerjaReport($id,$date), $n);
                 return  Storage::download($n);
