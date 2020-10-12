@@ -71,7 +71,7 @@ class User extends Controller {
                                 ->first();
                      return $this->response('Registration Success',
                                      array(
-                                            'id_user' => $user_->id,
+                                            'id_user' => $user_->id_user,
                                             'username'=>$user_->username,
                                             'email'=>$user_->email,
                                             'fullname' => $user_->fullname,
