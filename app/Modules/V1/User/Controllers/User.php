@@ -56,6 +56,7 @@ class User extends Controller {
                      $detail->location = !empty($body->location)?$body->location:null;
                      $detail->email    = !empty($body->email)?$body->email:null;
                      $detail->phone    = !empty($body->phone)?$body->phone:null;
+                     $detail->position = !empty($body->position)?$body->position:null;
                      $detail->save();
                      $user_ = UserModel::select(array(
                                         'user.id_user',

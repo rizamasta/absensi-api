@@ -19,6 +19,7 @@ class UserDetail extends Model {
             "email",
             "level",
             "location",
+            "position",
             "created_at",
             "updated_at"
     ];
