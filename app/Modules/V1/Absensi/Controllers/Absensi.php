@@ -62,6 +62,9 @@ class Absensi extends Controller {
     }
     public function export(Request $req)
     {
+        if($req->user->rules!=1){
+            return $this->response('Tidak ada hak akses',[],403);
+        }
         return Excel::download(new AbsensiReport, date('YmdTHis').'.xlsx');
     }
 }
