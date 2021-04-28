@@ -25,6 +25,7 @@ class AbsensiMiddleWare  extends Controller
         $user = User::select(array(
                             'user.id_user',
                             'user.username',
+                            'user.rules',
                             'user_profile.email',
                             'user_profile.fullname',
                             'user_profile.level',
