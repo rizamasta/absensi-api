@@ -13,9 +13,40 @@ use Validator;
 
 class User extends Controller {
     
-    public function list(Type $var = null)
+    public function list(Request $req)
     {
-        # code...
+        return $this->response("Success",UserModel::select(array("user.*","ud.fullname","ud.level","ud.location","ud.position"))->leftJoin("user_profile as ud","ud.id_user", "=" ,"user.id_user")->get());
+    }
+    public function update(Request $req,$id){
+        $body =(Object)$req->json()->all();
+        $rules= array(
+                        'username'=>'required',
+                        'fullname'=>'required',
+                        'level'=>'required',
+                        'location'=>'required',
+                        'position'=>'required'
+
+                     );
+        
+        $validator = Validator::make($req->json()->all(),$rules);
+        if($validator->passes()){
+            UserDetail::where('id_user',$id)->update(array(
+                        "fullname"=> $body->fullname,
+                        "level"=> $body->level,
+                        "location"=> $body->location,
+                        "position"=> $body->position,
+                     ));
+            return $this->response('Success mengubah data pegawai');
+        }
+        else{
+            return $this->response('Tidak boleh ada data kosong',$validator->errors(),400);
+
+        }
+    }
+    public function delete(Request $req,$id){
+        UserModel::where('id_user',$id)->delete();
+        return $this->response('Success menghapus data pegawai');
+
     }
     public function register(Request $req){
         $body =(Object)$req->json()->all();
@@ -70,7 +101,7 @@ class User extends Controller {
                                 ->where('user.id_user',$user->id_user)
                                 ->leftJoin('user_profile','user_profile.id_user','=','user.id_user')
                                 ->first();
-                     return $this->response('Registration Success',
+                     return $this->response('Pegawai berhasil ditambahkan',
                                      array(
                                             'id_user' => $user_->id_user,
                                             'username'=>$user_->username,
@@ -83,7 +114,7 @@ class User extends Controller {
                                          ));
                  }
                  else{
-                    return $this->response('Registration Failed',
+                    return $this->response('Gagal',
                                      array(),500);
                  }
              }
