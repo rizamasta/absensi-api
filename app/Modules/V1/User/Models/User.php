@@ -1,8 +1,9 @@
 <?php
 namespace App\Modules\V1\User\Models;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Model {
+    use SoftDeletes;
     protected $table = 'user';
     protected $primaryKey = 'id_user';
     public $timestamps = false;
