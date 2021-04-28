@@ -19,8 +19,6 @@ class Controller extends BaseController
     protected function jwt($user) {
         $payload = [
             'id_user' => $user->id_user,
-            'email' => $user->email,
-            'username' => $user->username, 
             'expired' => time() + 60*60
         ];
         return JWT::encode($payload, env('JWT_SECRET'));
