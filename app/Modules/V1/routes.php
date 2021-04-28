@@ -27,6 +27,7 @@ $router->group(['prefix' => 'v1','middleware' => 'api.auth'],  function () use (
         $router->get('/me', 'User@me');
         $router->get('/list', 'User@list');
         $router->put('/edit/{id}', 'User@update');
+        $router->put('/reset/{id}', 'User@resetpassword');
         $router->delete('/delete/{id}', 'User@delete');
 
         $router->put('/change-password', 'User@changePassword');

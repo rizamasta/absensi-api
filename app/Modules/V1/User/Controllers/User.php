@@ -49,6 +49,7 @@ class User extends Controller {
 
         }
     }
+
     public function delete(Request $req,$id){
         if($req->user->rules!=1){
             return $this->response('Tidak ada hak akses',[],403);
@@ -57,6 +58,27 @@ class User extends Controller {
         return $this->response('Success menghapus data pegawai');
 
     }
+
+    public function resetpassword(Request $req,$id){
+        if($req->user->rules!=1){
+            return $this->response('Tidak ada hak akses',[],403);
+        }
+        $user = UserModel::where('id_user',$id)->first();
+        if($user){
+            UserModel::where('id_user',$id)->update(array('password'=>Hash::make($user->username)));
+            return $this->response('Success reset');
+
+        }
+        else{
+            return $this->response('Data tidak ditemukan',[],400);
+        }
+        
+        delete();
+        return $this->response('Success menghapus data pegawai');
+
+    }
+
+
     public function register(Request $req){
         $body =(Object)$req->json()->all();
         $rules= array(
