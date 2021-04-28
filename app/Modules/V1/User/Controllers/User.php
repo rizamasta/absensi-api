@@ -15,9 +15,15 @@ class User extends Controller {
     
     public function list(Request $req)
     {
+        if($req->user->rules!=1){
+            return $this->response('Tidak ada hak akses',[],403);
+        }
         return $this->response("Success",UserModel::select(array("user.*","ud.fullname","ud.level","ud.location","ud.position"))->leftJoin("user_profile as ud","ud.id_user", "=" ,"user.id_user")->get());
     }
     public function update(Request $req,$id){
+        if($req->user->rules!=1){
+            return $this->response('Tidak ada hak akses',[],403);
+        }
         $body =(Object)$req->json()->all();
         $rules= array(
                         'username'=>'required',
@@ -44,6 +50,9 @@ class User extends Controller {
         }
     }
     public function delete(Request $req,$id){
+        if($req->user->rules!=1){
+            return $this->response('Tidak ada hak akses',[],403);
+        }
         UserModel::where('id_user',$id)->delete();
         return $this->response('Success menghapus data pegawai');
 
