@@ -25,6 +25,10 @@ $router->group(['prefix' => 'v1','middleware' => 'api.auth'],  function () use (
     //end no use token
     $router->group(['prefix' => 'user', 'namespace' => 'App\Modules\V1\User\Controllers','middleware' => 'jwt.auth'], function() use($router) {
         $router->get('/me', 'User@me');
+        $router->get('/list', 'User@list');
+        $router->put('/edit/{id}', 'User@update');
+        $router->delete('/delete/{id}', 'User@delete');
+
         $router->put('/change-password', 'User@changePassword');
         $router->get('/kinerja', 'Kinerjaharian@list');
         $router->get('/kinerja/report', 'Kinerjaharian@report');
